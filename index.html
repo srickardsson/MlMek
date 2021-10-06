@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="sv-SE">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>  </title>
+    
+    <!-- Include CSS -->
+    <link href="/wp-content/plugins/onecom-under-construction/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/wp-content/plugins/onecom-under-construction/themes/theme-1/style.css?ver=1.0.6" rel="stylesheet">
+
+    <!-- Include JS -->
+    <script src="/wp-content/plugins/onecom-under-construction/assets/js/jquery.min.js"></script>
+    <script src="/wp-content/plugins/onecom-under-construction/assets/js/script.js?ver=1.0.6"></script>
+
+    <!-- WordPress meta tag generator -->
+    <meta name="generator" content="WordPress 5.8.1">
+    <!-- Design Customization -->
+    <style>body {
+            background:  url('/wp-content/plugins/onecom-under-construction/assets/images/design-1-bg.jpeg') no-repeat top center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+
+        
+        /** Firefox - Mobile only CSS fix for placeholder padding */
+        @-moz-document url-prefix() {
+            .ocuc-page .oc-captcha-wrap .oc-captcha-val {
+                margin: 1px;
+                border: 1px solid #ccc;
+                height: 24px;
+            }
+
+            .ocuc-page .newsletter .form-control.oc-newsletter-input {
+                padding: 0.8rem 1.2rem;
+            }
+        }</style>
+
+    <!-- Include ajax, timer js, and analytics js -->
+    <script>
+        var oc_ajax = {
+            ajaxurl: '/wp-admin/admin-ajax.php'
+        }
+    </script>
+        <script>
+        (function($) {
+            $(document).ready(function() {
+                var currentTime = Number(1633466250);
+                // Update the countdown every 1 second
+                var x = setInterval(function() {
+                    // Update the countdown every 1 second
+                    //var currentTime = Number(1633466250);
+
+                    // Ajax call to get latest timestamp from WordPress
+                    $.ajax({
+                        url: oc_ajax.ajaxurl,
+                        type: "POST",
+                        data: {
+                            'action': 'ocuc_wp_time'
+                        },
+                        success: function(data) {
+                            // return current timestamp based on WordPress settings
+                            // console.log(data);
+                            currentTime = data;
+                        },
+                        error: function(errorThrown) {
+                            currentTime = data;
+                        }
+                    });
+
+                    // Timer end date
+                    var endDate = 1633552560;
+
+                    // Find the interval between now and the countdown date
+                    var interval = endDate - currentTime;
+
+                    // Time calculations for days, hours, minutes and seconds
+                    var seconds = Number(interval);
+                    var days = Math.floor(seconds / (3600 * 24));
+                    days = String("00" + days).slice(-2); // keep it in 2 digit always
+                    var hours = Math.floor(seconds % (3600 * 24) / 3600);
+                    hours = String("00" + hours).slice(-2);
+                    var minutes = Math.floor(seconds % 3600 / 60);
+                    minutes = String("00" + minutes).slice(-2);
+                    var seconds = Math.floor(seconds % 60);
+                    seconds = String("00" + seconds).slice(-2);
+
+                    // Show timer have future date
+                    if (interval > 0) {
+                        document.getElementById("counter-day").innerHTML = days;
+                        document.getElementById("counter-hour").innerHTML = hours;
+                        document.getElementById("counter-minute").innerHTML = minutes;
+                        document.getElementById("counter-second").innerHTML = seconds;
+                    }
+                    // If the timer is finished, set it 00
+                    else {
+                        clearInterval(x);
+                        document.getElementById("counter-day").innerHTML = "00";
+                        document.getElementById("counter-hour").innerHTML = "00";
+                        document.getElementById("counter-minute").innerHTML = "00";
+                        document.getElementById("counter-second").innerHTML = "00";
+                    }
+                }, 1000);
+            });
+
+        })(jQuery)
+    </script>
+</head>
+
+<body>
+    <div class="wrapper ocuc-page">
+        <div class="container">
+            <main class="ocuc-content-box">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <!-- Display logo or site title -->
+                        <div class="ocuc-site-title-logo">
+                            <h1>MLmek</h1>                        </div>
+
+                        <!-- Display the headline -->
+                                                    <h2 class="ocuc-headline">
+                                Something is happening. Check in later!                            </h2>
+                        
+                                                    <div class="ocuc-timer">
+                                <div class="timer">
+    <div>
+        <span class="count-number" id="counter-day"></span>
+        <div class="smalltext">Dagar</div>
+    </div>
+    <div>
+        <span class="count-number" id="counter-hour"></span>
+        <div class="smalltext">Timmar</div>
+    </div>
+    <div>
+        <span class="count-number" id="counter-minute"></span>
+        <div class="smalltext">Minuter</div>
+    </div>
+    <div>
+        <span class="count-number" id="counter-second"></span>
+        <div class="smalltext">Sekunder</div>
+    </div>
+    <p id="time-up"></p>
+</div>
+                            </div>
+                        
+                        <div class="newsletter"><p>För att aktivera prenumerationer på nyhetsbrev måste användarregistrering tillåtas.</p></div>
+                        <div class="ocuc-description">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultrices neque ornare aenean euismod elementum nisi quis eleifend. Sagittis eu volutpat odio facilisis mauris. Sed risus pretium quam vulputate. Fermentum dui faucibus in ornare.                        </div>
+
+                                                    <div class="ocuc-copyright">
+                                Copyright &copy; 2021. All rights reserved                            </div>
+                                            </div>
+                </div>
+            </main>
+
+            
+        </div>
+    </div>
+    </body>
+</html>
